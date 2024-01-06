@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Apps
     'core.apps.CoreConfig',
+    'userauths.apps.UserauthsConfig',
 ]
 
 MIDDLEWARE = [
