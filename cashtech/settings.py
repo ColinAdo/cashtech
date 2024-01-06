@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin', 
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,6 +57,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'cashtech.urls'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "CashTech",
+    "site_header": "CashTech",
+    "site_brand": "CashTech",
+    # "site_logo": "images/logo.png",
+    "copyright": "CashTech - All RIght Reserverd © Copyright 2024",
+    # "order_with_respect_to": ["core", 'userauths', "transactions" , 'addon', 'blog']
+}
 
 TEMPLATES = [
     {
