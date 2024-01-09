@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from .forms import SignupForm
+from .models import User
 
 def signup(request):
     template = 'userauths/sign-up.html'
@@ -33,3 +34,30 @@ def signup(request):
         'form': form,
     }
     return render(request, template, context)
+
+def signin(request):
+    template = 'userauths/sign-in.html'
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        try:
+            user = User.objects.get(email=email)
+            user = authenticate(request, email=email, password=password)
+
+            if user is not None:
+                login(request, user)
+                messages.success(request,'you have logged in successfully')
+                return redirect('index')
+            else:
+                messages.warning(request, 'Incorrect email or password')
+        except:
+            messages.warning(request, 'User does not exist')
+
+    return render(request, template)
+
+def signout(request):
+    logout(request)
+    messages.info(request, 'Logged out!')
+    return redirect('signin')
