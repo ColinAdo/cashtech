@@ -67,6 +67,7 @@ cover/
 
 userauths/migrations/*
 core/migrations/*
+account/migrations/*
 
 # Translations
 *.mo
