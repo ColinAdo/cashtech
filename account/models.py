@@ -16,6 +16,25 @@ ACCOUNT_STATUS = (
     ('in-active', 'In-active'),
 )
 
+MARITAL_STATUS = (
+    ('married', 'Married'),
+    ('single', 'Single'),
+    ('divorced', 'Divorced')
+)
+
+IDENTIFICATION_TYPE = (
+    ('national_id', 'National ID'),
+    ('driver_license', 'Driver License'),
+    ('passport', 'Passport'),
+)
+
+
+GENDER = (
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('other', 'Other'),
+)
+
 class Account(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -35,3 +54,29 @@ class Account(models.Model):
 
     def __str__(self):
         return f'{self.user.username} account'
+    
+
+class KYC(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='KYC/profile', default='default.png')
+    gender = models.CharField(max_length=20, choices=GENDER)
+    identity_type = models.CharField(max_length=30, choices=IDENTIFICATION_TYPE)
+    identity_image = models.ImageField(upload_to="KYC/identification", null=True, blank=True)
+    marital_status = models.CharField(max_length=10, choices=MARITAL_STATUS)
+    signiture = models.ImageField(upload_to='KYC/signiture')
+    dob = models.DateTimeField(auto_now_add=False)
+
+    # country
+    country = models.CharField(max_length=150)
+    state = models.CharField(max_length=150)
+    city = models.CharField(max_length=150)
+
+    # contact
+    mobile = models.CharField(max_length=20)
+    fax = models.CharField(max_length=20)
+    date = models.DateField(auto_now_add=True)
+
+    def __str_(self):
+        return f'{self.user}'
