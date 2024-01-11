@@ -24,7 +24,7 @@ class Account(models.Model):
     account_number = ShortUUIDField(length=10, max_length=20, unique=True, prefix='217', alphabet='1234567890')
     pin_number = ShortUUIDField(length=4, max_length=7, unique=True, alphabet='1234567890')
     red_code = ShortUUIDField(length=10, max_length=20, unique=True, alphabet='1234567890')
-    account_status = models.CharField(max_length=100, choices=ACCOUNT_STATUS)
+    account_status = models.CharField(max_length=100, choices=ACCOUNT_STATUS, default='in-active')
     kyc_submitted = models.BooleanField(default=False)
     kyc_confirmed = models.BooleanField(default=False)
     recommended_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True, related_name="recommended_by")
