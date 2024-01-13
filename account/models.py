@@ -79,4 +79,4 @@ class KYC(models.Model):
     date = models.DateField(auto_now_add=True)
 
     def __str_(self):
-        return f'{self.user}'
+        return f'{self.full_name} KYC'
