@@ -49,7 +49,7 @@
                                     
                                 
                                     
-                                <a href="{% url 'userauths:sign-out' %}">
+                                <a href="{% url 'signout' %}">
                                     <img src="{% static 'assets1/images/icon/logout.png' %}" alt="image">
                                     Logout
                                 </a>
@@ -88,88 +88,67 @@
                             <div class="tab-content mt-40">
                                 <div class="tab-pane fade show active" id="account" role="tabpanel"
                                     aria-labelledby="account-tab">
-                                    <div class="upload-avatar">
-                                        <div class="avatar-left d-flex align-items-center">
-                                            <div class="profile-img">
-                                                <!-- <img src="{% static 'assets1/images/owner-profile-2.png' %}" alt="image"> -->
-                                                <img style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" src="{{ kyc.image.url }}" alt="image">
-                                            </div>
-                                            <div class="instraction">
-                                                <h6>Your Avatar</h6>
-                                                <!-- <p>Profile picture size: 400px x 400px</p> -->
-                                            </div>
-                                        </div>
-                                        <!-- <div class="avatar-right">
-                                            <div class="file-upload">
-                                                <div class="right-area">
-                                                    <label class="file">
-                                                        <input type="file">
-                                                        <span class="file-custom"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                    </div>
+                                    
                                     <form action="#">
                                         <div class="row justify-content-center">
                                             <div class="col-md-6">
                                                 <div class="single-input">
                                                     <label for="fName">Full Name</label>
-                                                    <input type="text" id="fName" readonly placeholder="Alfred" value="{{kyc.full_name|title}}">
+                                                    <input type="text" readonly id="fName" readonly placeholder="Alfred" value="{{kyc.full_name|title}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-input">
                                                     <label for="lName">Email</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.user.email }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.user.email }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-input">
                                                     <label for="lName">Gender</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.gender|title }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.gender|title }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-input">
                                                     <label for="lName">Marrital</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.marrital_status|title }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.marital_status|title }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="single-input">
                                                     <label for="lName">Date of Birth</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.date_of_birth|date:'d M, Y' }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.dob|date:'d M, Y' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="single-input">
                                                     <label for="lName">Mobile</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.mobile }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.mobile }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="single-input">
                                                     <label for="lName">Identity Type</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.identity_type|title }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.identity_type|title }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="single-input">
                                                     <label for="lName">Country</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.country|title }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.country|title }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="single-input">
                                                     <label for="lName">State</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.state|title }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.state|title }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="single-input">
                                                     <label for="lName">City</label>
-                                                    <input type="text" id="lName" placeholder="Davis" value="{{ kyc.city|title }}">
+                                                    <input type="text" readonly id="lName" placeholder="Davis" value="{{ kyc.city|title }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
