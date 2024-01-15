@@ -9,8 +9,8 @@ def account(request):
     try:
         kyc = KYC.objects.get(user=request.user)
     except:
-        messages.warning(request, 'You hae not submitted your KYC')
-        return redirect('kyc-reg')
+        messages.warning(request, 'You have not submitted your KYC')
+        return redirect('kyc')
     
     account = Account.objects.get(user=request.user)
     context = {
