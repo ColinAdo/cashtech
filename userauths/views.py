@@ -24,7 +24,7 @@ def signup(request):
             new_user = authenticate(email=email, password=password)
 
             login(request, new_user)
-            return redirect('index')
+            return redirect('account')
         
     else:
         form = SignupForm()
@@ -49,7 +49,7 @@ def signin(request):
             if user is not None:
                 login(request, user)
                 messages.success(request,'you have logged in successfully')
-                return redirect('index')
+                return redirect('account')
             else:
                 messages.warning(request, 'Incorrect email or password')
         except:
