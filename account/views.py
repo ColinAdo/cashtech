@@ -1,8 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from .models import KYC
+from .models import KYC, Account
 from .forms import KYCForm
+
+def account(request):
+    template = 'account/account.html'
+    try:
+        kyc = KYC.objects.get(user=request.user)
+    except:
+        messages.warning(request, 'You hae not submitted your KYC')
+        return redirect('kyc-reg')
+    
+    account = Account.objects.get(user=request.user)
+    context = {
+        'kyc': kyc,
+        'account': account,
+    }
+    return render(request, template, context)
 
 def kyc_registration(request):
     template = 'account/kyc_reg_form.html'
