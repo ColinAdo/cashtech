@@ -30,12 +30,12 @@ def kyc_registration(request):
     if request.method == 'POST':
         form = KYCForm(request.POST, request.FILES, instance=kyc)
         if form.is_valid():
-            new_kyc = form.save()
+            new_kyc = form.save(commit=False)
             new_kyc.user = user
             new_kyc.save()
 
             messages.success(request, "Kyc saved successfully")
-            return redirect('index')
+            return redirect('account')
     else:
         form = KYCForm(instance=kyc)
 
