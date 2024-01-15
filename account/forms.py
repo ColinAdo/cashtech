@@ -34,6 +34,7 @@ class KYCForm(forms.ModelForm):
             'state': forms.TextInput(attrs={'placeholder':'State'}),
             'city': forms.TextInput(attrs={'placeholder':'City'}),
             'mobile': forms.TextInput(attrs={'placeholder':'Mobile'}),
+            'fax': forms.TextInput(attrs={'placeholder':'Fax'}),
             'dob': DateInput,
         }
 
