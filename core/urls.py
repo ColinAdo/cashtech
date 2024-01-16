@@ -8,4 +8,5 @@ urlpatterns = [
     # Transfers
     path("search/", transfer.search_account, name="search_account"),
     path("transfer-amount/<account_number>/", transfer.transfer_ammount, name="transfer_amount"),
+    path("transaction/<account_number>/", transfer.transaction, name="transaction"),
 ]

@@ -3,6 +3,9 @@ from django.contrib import messages
 from django.db.models import Q
 
 from account.models import Account  
+from .models import Transaction
+
+from decimal import Decimal
 
 def search_account(request):
     template = 'transfer/search_account.html'
@@ -32,3 +35,41 @@ def transfer_ammount(request, account_number):
         'account': account
     }
     return render(request, template, context)
+
+def transaction(request, account_number):
+    user = request.user
+    account = Account.objects.get(account_number=account_number)
+
+    sender = user
+    reciever = account.user
+
+    reciever_account = account
+    sender_account = user.account
+
+    amount = request.POST.get('amount')
+    description = request.POST.get('description')
+
+    if request.method == 'POST':
+        if float(sender_account.account_balance) >= float(amount):
+            new_transaction = Transaction.objects.create(
+                user=user,
+                amount=amount,
+                description=description,
+                reciever=reciever,
+                sender=sender,
+                reciever_account=reciever_account,
+                sender_account=sender_account,
+                status='processing',
+                transaction_type='transfer'
+            )
+
+            new_transaction.save()
+
+            transaction_id = new_transaction.transaction_id
+
+            return redirect('search_account') # redirect TO CONFIRM TRANSFER
+        else:
+            messages.warning(request, 'You do not have sufficient balance')
+            return redirect('transfer_amount', account_number)
+    else:
+        return redirect('search_account')
