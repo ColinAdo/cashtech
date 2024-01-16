@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.db.models import Q
 
 from account.models import Account  
@@ -17,5 +18,17 @@ def search_account(request):
     context = {
         'account': account,
         'query': query
+    }
+    return render(request, template, context)
+
+def transfer_ammount(request, account_number):
+    template = 'transfer/transfer_amount.html'
+    try:
+        account = Account.objects.get(account_number=account_number)
+    except:
+        messages.warning(request, 'Account number does not exist!')
+        return redirect('search')
+    context = {
+        'account': account
     }
     return render(request, template, context)
