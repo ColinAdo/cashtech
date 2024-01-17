@@ -131,10 +131,10 @@
                                         <div class="main-content">
                                             <h4>Confirm Transfer!</h4>
                                             <p>Enter your pin number below.</p>
-                                            <form action="" method="POST">
+                                            <form action="{% url 'complete_transfer' account.account_number transaction.transaction_id %}" method="POST">
                                                 {% csrf_token %}
                                                 <div class="userInput">
-                                                    <input minlength="4" maxlength="4" name="pin-number" type="text">
+                                                    <input minlength="4" maxlength="4" name="pin" type="text">
                                                 </div>
                                                 <a href="javascript:void(0)">Reset Pin Number?</a>
                                                 <button type="submit" class="mt-60 confirm">Confirm</button>

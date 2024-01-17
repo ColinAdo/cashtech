@@ -89,3 +89,40 @@ def confirm_transfer(request, account_number, transaction_id):
         'transaction': transaction
     }
     return render(request, template, context)
+
+def complete_transfer(request, account_number, transaction_id):
+    template = 'transfer/complete_transfer.html'
+
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    user = request.user
+    sender = user
+    receiver = account.user
+
+    sender_account = user.account
+    receiver_account = account
+
+    pin = request.POST.get('pin')
+
+    if request.method == 'POST':
+        
+        if pin == sender_account.pin_number:
+            transaction.status = 'completed'
+            transaction.save()
+            # subtracting money
+            sender_account.account_balance -= transaction.amount
+            sender_account.save()
+
+            # Adding to user account
+            receiver_account.account_balance += transaction.amount
+            receiver_account.save()
+
+            messages.success(request, 'Transaction Completed successfully')
+            return redirect('account')
+        else:
+            messages.warning(request, 'Incorrect Pin!')
+            return redirect('complete_transfer', account_number, transaction_id)
+    else:
+        messages.warning(request, 'PLease Try again later!')
+        return redirect('account')
