@@ -67,9 +67,25 @@ def transaction(request, account_number):
 
             transaction_id = new_transaction.transaction_id
 
-            return redirect('search_account') # redirect TO CONFIRM TRANSFER
+            return redirect('confirm_transfer', account.account_number, transaction_id) # redirect TO CONFIRM TRANSFER
         else:
             messages.warning(request, 'You do not have sufficient balance')
             return redirect('transfer_amount', account_number)
     else:
         return redirect('search_account')
+    
+def confirm_transfer(request, account_number, transaction_id):
+    template = 'transfer/confirm_transfer.html'
+
+    try:
+        account = Account.objects.get(account_number=account_number)
+        transaction = Transaction.objects.get(transaction_id=transaction_id)
+    except:
+        messages.warning(request, 'You do not have sufficient balance')
+        return redirect('search_account')
+    
+    context = {
+        'account': account,
+        'transaction': transaction
+    }
+    return render(request, template, context)
