@@ -11,4 +11,5 @@ urlpatterns = [
     path("transaction/<account_number>/", transfer.transaction, name="transaction"),
     path("confirm-transfer/<account_number>/<transaction_id>/", transfer.confirm_transfer, name="confirm_transfer"),
     path("complete-transfer/<account_number>/<transaction_id>/",transfer.complete_transfer, name="complete_transfer"),
+    path("complete-transaction/<account_number>/<transaction_id>/",transfer.complete_transaction, name="complete_transaction"),
 ]

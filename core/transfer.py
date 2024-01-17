@@ -97,9 +97,6 @@ def complete_transfer(request, account_number, transaction_id):
     transaction = Transaction.objects.get(transaction_id=transaction_id)
 
     user = request.user
-    sender = user
-    receiver = account.user
-
     sender_account = user.account
     receiver_account = account
 
@@ -119,10 +116,27 @@ def complete_transfer(request, account_number, transaction_id):
             receiver_account.save()
 
             messages.success(request, 'Transaction Completed successfully')
-            return redirect('account')
+            return redirect('complete_transaction', account_number, transaction_id)
         else:
             messages.warning(request, 'Incorrect Pin!')
             return redirect('complete_transfer', account_number, transaction_id)
     else:
         messages.warning(request, 'PLease Try again later!')
         return redirect('account')
+
+
+def complete_transaction(request, account_number, transaction_id):
+    template = 'transfer/complete_transaction.html'
+
+    try:
+        account = Account.objects.get(account_number=account_number)
+        transaction = Transaction.objects.get(transaction_id=transaction_id)
+    except:
+        messages.warning(request, 'Try again later')
+        return redirect('search_account')
+
+    context = {
+        'account': account,
+        'transaction': transaction
+    }
+    return render(request, template, context)
