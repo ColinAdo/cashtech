@@ -57,7 +57,7 @@ def request_transaction(request, account_number):
             sender=sender,
             reciever_account=receiver_account,
             sender_account=sender_account,
-            status='request_sent',
+            status='request_processing',
             transaction_type='request'
         )
 
@@ -81,3 +81,28 @@ def request_confirm(request, account_number, transaction_id):
         'transaction': transaction
     }
     return render(request, template, context)
+
+def request_processing(request, account_number, transaction_id):
+    template = 'request-account/request_processing.html'
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    if request.method == 'POST':
+        pin = request.POST.get('pin-number')
+
+        if pin == request.user.account.pin_number:
+            transaction.status = 'request_sent'
+            transaction.save()
+
+            transaction_id=transaction.transaction_id
+
+            messages.success(request, 'Payment Request Sent Successfully!')
+            return redirect('request_complete', account_number, transaction_id)
+        else:
+            messages.warning(request, 'Wrong Pin!')
+            return redirect('request_confirm', account_number, transaction_id)
+
+    else:
+        messages.warning(request, 'Try Again Later!')
+        return redirect('dashboard')
+    
