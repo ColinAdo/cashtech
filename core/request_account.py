@@ -65,8 +65,19 @@ def request_transaction(request, account_number):
 
         transaction_id = new_transaction.transaction_id
 
-        messages.success(request, 'Payment Request Sent')
         return redirect('request_confirm', account_number, transaction_id)
     else:
         messages.warning(request, 'Try again later!')
         return redirect('account')
+    
+def request_confirm(request, account_number, transaction_id):
+    template = 'request-account/request_confirm.html'
+
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    context = {
+        'account': account,
+        'transaction': transaction
+    }
+    return render(request, template, context)
