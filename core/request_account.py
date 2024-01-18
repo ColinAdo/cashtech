@@ -106,3 +106,13 @@ def request_processing(request, account_number, transaction_id):
         messages.warning(request, 'Try Again Later!')
         return redirect('dashboard')
     
+def request_complete(request, account_number, transaction_id):
+    template = 'request-account/request_complete.html'
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    context = {
+        'account': account,
+        'transaction': transaction
+    }
+    return render(request, template, context)
