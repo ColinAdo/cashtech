@@ -20,5 +20,6 @@ urlpatterns = [
     # Request payment
     path("request/", request_account.request_account, name="request_account"),
     path("request-amount/<account_number>/",request_account.request_ammount, name="request_amount"),
+    path("request-transaction/<account_number>/",request_account.request_transaction, name="request_transaction"),
 
 ]
