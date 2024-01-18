@@ -46,4 +46,18 @@ def kyc_registration(request):
     return render(request,template, context)
 
 
+def dashboard(request):
+    template = 'account/dashboard.html'
+    try:
+        kyc = KYC.objects.get(user=request.user)
+    except:
+        messages.warning(request, 'You have not submitted your KYC')
+        return redirect('kyc')
+
+    account = Account.objects.get(user=request.user)
+    context = {
+        'kyc': kyc,
+        'account': account,
+    }
+    return render(request, template, context)
 
