@@ -23,5 +23,6 @@ urlpatterns = [
     path("request-transaction/<account_number>/",request_account.request_transaction, name="request_transaction"),
     path("request-confirm/<account_number>/<transaction_id>/",request_account.request_confirm, name="request_confirm"),
     path("request-processing/<account_number>/<transaction_id>/",request_account.request_processing, name="request_processing"),
+    path("request-complete/<account_number>/<transaction_id>/",request_account.request_complete, name="request_complete"),
 
 ]
