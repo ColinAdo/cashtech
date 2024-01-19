@@ -174,3 +174,15 @@ def complete_settlement(request, account_number, transaction_id):
         'transaction': transaction
     }
     return render(request, template, context)
+
+
+def delete_request_transaction(request, account_number, transaction_id):
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+    
+    if request.user == transaction.user:
+        transaction.delete()
+        messages.success(request, 'Transaction request deleted successfully')
+        return redirect('transactions')
+
+    return redirect('transactions')
