@@ -116,3 +116,16 @@ def request_complete(request, account_number, transaction_id):
         'transaction': transaction
     }
     return render(request, template, context)
+
+
+def confirm_settlement(request, account_number, transaction_id):
+    template = 'request-account/confirm_settlement.html'
+    
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    context = {
+        'account': account,
+        'transaction': transaction
+    }
+    return render(request, template, context)
