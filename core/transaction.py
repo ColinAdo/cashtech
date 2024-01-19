@@ -6,9 +6,15 @@ def transaction_list(request):
     sender_transaction = Transaction.objects.filter(sender=request.user, transaction_type='transfer')
     receiver_transaction = Transaction.objects.filter(reciever=request.user, transaction_type='transfer')
 
+    request_sender_transaction = Transaction.objects.filter(sender=request.user, transaction_type='request')
+    request_reciever_transaction = Transaction.objects.filter(reciever=request.user, transaction_type='request')
+
     context = {
         'sender_transaction': sender_transaction,
-        'receiver_transaction': receiver_transaction
+        'receiver_transaction': receiver_transaction,
+
+        'request_sender_transaction': request_sender_transaction,
+        'request_reciever_transaction': request_reciever_transaction
     }
     return render(request, template, context)
 
