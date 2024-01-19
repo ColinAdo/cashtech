@@ -27,5 +27,6 @@ urlpatterns = [
 
     # Settlement
     path("confirm-settlement/<account_number>/<transaction_id>/",request_account.confirm_settlement, name="confirm_settlement"),
+    path("process-settlement/<account_number>/<transaction_id>/",request_account.process_settlement, name="process_settlement"),
 
 ]

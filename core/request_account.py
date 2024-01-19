@@ -129,3 +129,36 @@ def confirm_settlement(request, account_number, transaction_id):
         'transaction': transaction
     }
     return render(request, template, context)
+
+def process_settlement(request, account_number, transaction_id):
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    sender_account = request.user.account
+
+    if request.method == 'POST':
+        pin = request.POST.get('pin-number')
+
+        if pin == sender_account.pin_number:
+            if float(sender_account.account_balance) > (transaction.amount):
+                sender_account.account_balance -= transaction.amount
+                sender_account.save()
+
+                account.account_balance += transaction.amount
+                account.save()
+
+                transaction.status = 'request_settled'
+                transaction.save()
+
+                messages.success(request, f'{transaction.amount} was settled to {account.user.username}')
+                return redirect('dashboard') # Retrun to completed page
+            else:
+                messages.warning(request, 'You have insufficient balance!')
+            
+        else:
+            messages.warning(request, 'Wrong Pin!')
+            return redirect('confirm_settlement', account_number, transaction_id)
+
+    else:
+        messages.warning(request, 'Try again later!')
+        return redirect('dashboard')
