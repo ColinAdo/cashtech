@@ -151,7 +151,7 @@ def process_settlement(request, account_number, transaction_id):
                 transaction.save()
 
                 messages.success(request, f'{transaction.amount} was settled to {account.user.username}')
-                return redirect('dashboard') # Retrun to completed page
+                return redirect('complete_settlement', account_number, transaction_id)
             else:
                 messages.warning(request, 'You have insufficient balance!')
             
@@ -162,3 +162,15 @@ def process_settlement(request, account_number, transaction_id):
     else:
         messages.warning(request, 'Try again later!')
         return redirect('dashboard')
+    
+
+def complete_settlement(request, account_number, transaction_id):
+    template = 'request-account/request_complete.html'
+    account = Account.objects.get(account_number=account_number)
+    transaction = Transaction.objects.get(transaction_id=transaction_id)
+
+    context = {
+        'account': account,
+        'transaction': transaction
+    }
+    return render(request, template, context)
