@@ -5,6 +5,8 @@ from .models import KYC, Account
 from .forms import KYCForm
 
 from core.forms import CreditCardForm
+from core.models import CreditCard
+
 
 def account(request):
     template = 'account/account.html'
@@ -57,6 +59,7 @@ def dashboard(request):
         return redirect('kyc')
 
     account = Account.objects.get(user=request.user)
+    credit_card = CreditCard.objects.filter(user=request.user)
 
     form = CreditCardForm(request.POST)
     if request.method == 'POST':
@@ -73,7 +76,8 @@ def dashboard(request):
     context = {
         'kyc': kyc,
         'account': account,
-        'form': form
+        'form': form,
+        'credit_card': credit_card
     }
     return render(request, template, context)
 
