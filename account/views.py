@@ -81,3 +81,16 @@ def dashboard(request):
     }
     return render(request, template, context)
 
+
+def card_detail(request, credit_id):
+    template = 'account/card_detail.html'
+    account = Account.objects.get(user=request.user)
+    credit_card = CreditCard.objects.get(credit_id=credit_id, user=request.user)
+
+    context = {
+        'account': account,
+        'credit_card': credit_card
+    }
+
+    return render(request, template, context)
+
