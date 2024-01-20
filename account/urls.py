@@ -9,4 +9,5 @@ urlpatterns = [
     path('delete-card/<credit_id>/', views.delete_card, name='delete_card'),
     path('card_detail/<credit_id>/', views.card_detail, name='card_detail'),
     path('fund-card/<credit_id>/', views.fund_credit_card, name='fund_credit_card'),
+    path('withdraw/<credit_id>/', views.withdraw, name='withdraw'),
 ]
