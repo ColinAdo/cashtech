@@ -367,7 +367,7 @@
                                     
                                     
                                     {% for c in credit_card %}
-                                        <a href="">
+                                        <a href="{% url 'card_detail' c.credit_id %}">
                                             <div class="col-12">
                                                 <div class="card__main">
                                                     <div class="{% if c.credit_type == 'vivo' %}Front_card{% endif %}    {% if c.credit_type == 'master' %}masterCard{% endif %}    {% if c.credit_type == 'visa' %}visaCard{% endif %}">
