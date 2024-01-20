@@ -4,6 +4,8 @@ from django.contrib import messages
 from .models import KYC, Account
 from .forms import KYCForm
 
+from core.forms import CreditCardForm
+
 def account(request):
     template = 'account/account.html'
     try:
@@ -55,9 +57,23 @@ def dashboard(request):
         return redirect('kyc')
 
     account = Account.objects.get(user=request.user)
+
+    form = CreditCardForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            new_card = form.save(commit=False)
+            new_card.user = request.user
+            new_card.save()
+
+            messages.success(request, 'Added card successfully')
+            return redirect('dashboard')
+    else:
+        form = CreditCardForm()
+
     context = {
         'kyc': kyc,
         'account': account,
+        'form': form
     }
     return render(request, template, context)
 
