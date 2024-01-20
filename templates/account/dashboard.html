@@ -258,8 +258,8 @@
                                                                 {% endif %}
 
                                                                 {% if s.status == "request_processing" %}
-                                                                <a href="{% url 'core:transaction-detail' s.transaction_id %}" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
-                                                                <a href="{% url 'core:delete-request' s.sender.account.account_number s.transaction_id %}" class=" btn btn-danger"> <i class="fas fa-x"></i> Delete</a>
+                                                                <a href="{% url 'transaction_detail' s.transaction_id %}" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
+                                                                <a href="{% url 'delete_request_transaction' s.sender.account.account_number s.transaction_id %}" class=" btn btn-danger"> <i class="fas fa-x"></i> Delete</a>
                                                                 {% endif %}
 
                                                                 {% if s.status == "request_settled" %}
@@ -327,12 +327,12 @@
                                                             <td>
                                                                 
                                                                 {% if s.status == "request_sent" %}
-                                                                    <a href="{% url 'core:settlement-confirmation' s.sender.account.account_number s.transaction_id %}" class="btn btn-primary"><i class="fas fa-check-circle"></i> Settle</a>
-                                                                    <a href="{% url 'core:transaction-detail' s.transaction_id %}" class=" btn btn-danger"> <i class="fas fa-x"></i> Cancel</a>
+                                                                    <a href="{% url 'confirm_settlement' s.sender.account.account_number s.transaction_id %}" class="btn btn-primary"><i class="fas fa-check-circle"></i> Settle</a>
+                                                                    <a href="{% url 'transaction_detail' s.transaction_id %}" class=" btn btn-danger"> <i class="fas fa-x"></i> Cancel</a>
                                                                 {% endif %}
 
                                                                 {% if s.status == "request_settled" %}
-                                                                    <a href="" class="btn btn-success"><i class="fas fa-check-circle"></i> Settled</a>
+                                                                    <a href="{% url 'transaction_detail' s.transaction_id %}" class="btn btn-success"><i class="fas fa-check-circle"></i> Settled</a>
                                                                 {% endif %}
                                                                     
                                                             </td>
@@ -367,12 +367,12 @@
                                     
                                     
                                     {% for c in credit_card %}
-                                        <a href="{% url 'core:card-detail' c.card_id %}">
+                                        <a href="">
                                             <div class="col-12">
                                                 <div class="card__main">
-                                                    <div class="{% if c.card_type == 'verve' %}Front_card{% endif %}    {% if c.card_type == 'master' %}masterCard{% endif %}    {% if c.card_type == 'visa' %}visaCard{% endif %}">
+                                                    <div class="{% if c.credit_type == 'vivo' %}Front_card{% endif %}    {% if c.credit_type == 'master' %}masterCard{% endif %}    {% if c.credit_type == 'visa' %}visaCard{% endif %}">
                                                     <div class="top_card">
-                                                        <span class="visa">{{c.card_type|upper}}</span>
+                                                        <span class="visa">{{c.credit_type|upper}}</span>
                                                         <div class="logo">
                                                             <img src="{% static 'assets1/images/logo.png' %}" class="logo" alt="logo">
 
