@@ -1,0 +1,1 @@
+web: gunicorn cashtech.wsgi --log-file -
