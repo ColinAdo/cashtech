@@ -61,7 +61,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cashtech.urls'
 
-CSRF_TRUSTED_ORIGINS = ['https://cashapp.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = [
+'https://*.railway.app'
+]
 
 
 
