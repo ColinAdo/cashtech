@@ -61,6 +61,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'cashtech.urls'
 
+CSRF_COOKIE_SECURE = True
+
+
 JAZZMIN_SETTINGS = {
     "site_title": "CashTech",
     "site_header": "CashTech",
