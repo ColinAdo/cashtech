@@ -33,6 +33,7 @@ CREDIT_TYPE = (
     
 )
 
+# Transaction model 
 class Transaction(models.Model):
     transaction_id = ShortUUIDField(unique=True, length=15, max_length=20, prefix="TRN")
 
