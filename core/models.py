@@ -14,6 +14,7 @@ TRANSACTION_TYPE = (
     ("none", "None")
 )
 
+# Transaction Status choice 
 TRANSACTION_STATUS = (
     ("failed", "failed"),
     ("completed", "completed"),
