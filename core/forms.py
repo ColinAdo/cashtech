@@ -2,6 +2,7 @@ from django import forms
 
 from .models import CreditCard
 
+# Credit Card form 
 class CreditCardForm(forms.ModelForm):
     
     class Meta:
