@@ -4,7 +4,7 @@ from shortuuid.django_fields import ShortUUIDField
 from userauths.models import User
 from account.models import Account
 
-
+# Transaction Choices 
 TRANSACTION_TYPE = (
     ("transfer", "Transfer"),
     ("recieved", "Recieved"),
