@@ -25,6 +25,7 @@ TRANSACTION_STATUS = (
     ("request_processing", "request processing"),
 )
 
+# Credit type choice 
 CREDIT_TYPE = (
     ("visa", "visa"),
     ("master", "master"),
